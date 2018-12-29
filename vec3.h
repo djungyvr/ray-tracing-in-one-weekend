@@ -51,6 +51,20 @@ class vec3 {
 			return operator+=(-v);
 		}
 
+		vec3& operator*=(float s) {
+			e[0] *= s;
+			e[1] *= s;
+			e[2] *= s;
+			return *this;
+		}
+
+		vec3& operator /=(float s) {
+			e[0] /= s;
+			e[1] /= s;
+			e[2] /= s;
+			return *this;
+		}
+
 		float norm() const {
 			return sqrt(e[0]*e[0] + e[1]*e[1] + e[2]*e[2]);
 		}
