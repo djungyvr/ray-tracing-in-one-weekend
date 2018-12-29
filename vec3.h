@@ -1,12 +1,14 @@
-/*
- * vec3 represents geometric vectors and colors
- * Since functions defined in class I think it's implicitly inlined
- */
+#pragma once
 
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
 #include <stdexcept>
+
+/*
+ * vec3 represents geometric vectors and colors
+ * Since functions defined in class I think it's implicitly inlined
+ */
 
 class vec3 {
 	public:

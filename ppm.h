@@ -14,6 +14,7 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+#include "vec3.h"
 
 void writePPMHeader(std::ostream& file, int width, int height) {
 	file << "P3" << '\n';
@@ -31,16 +32,16 @@ void draw(std::ostream& file, int width, int height, const std::string& drawing)
 			char color = drawing.at(width*i + j);
 			switch(color) {
 				case 'R':
-					file << "255 0 0";
+					file << vec3(255, 0, 0);
 					break;
 				case 'G':
-					file << "0 255 0";
+					file << vec3(0, 255, 0);
 					break;
 				case 'B':
-					file << "0 0 255";
+					file << vec3(0, 0, 255);
 					break;
 				default:
-					file << "0 0 0";
+					file << vec3(255, 255, 255);
 					break;
 			}
 			file << '\n';
@@ -55,17 +56,14 @@ void drawGradient(std::ostream& file, int width, int height) {
 	for (int i = height - 1; i >= 0; --i) {
 		// Gets more red as we go right
 		for (int j = 0; j < width; ++j) {
-			float r {float(j) / float(width)};
-			float g {float(i) / float(height)};
-			float b {0.2};
+			vec3 color{float(j) / float(width), float(i) / float(height), 0.2};
 
-			int ir = int(255.9*r);
-			int ig = int(255.9*g);
-			int ib = int(255.9*b);
+			int ir = int(255.9*color.e1());
+			int ig = int(255.9*color.e2());
+			int ib = int(255.9*color.e3());
 
 			file << ir << ' ' << ig << ' ' << ib << '\n';
 		}
 	}
 }
-
 
