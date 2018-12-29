@@ -50,7 +50,10 @@ class vec3 {
 			return *this;
 		}
 		vec3& operator-=(const vec3& v) {
-			return operator+=(-v);
+			e[0] -= v.e1();
+			e[1] -= v.e2();
+			e[2] -= v.e3();
+			return *this;
 		}
 
 		vec3& operator*=(float s) {
@@ -73,6 +76,11 @@ class vec3 {
 
 		float squaredNorm() const {
 			return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
+		}
+
+		vec3 unit() const {
+			float n = norm();
+			return vec3(e[0] / n, e[1] / n, e[2] / n);
 		}
 
 	private:
