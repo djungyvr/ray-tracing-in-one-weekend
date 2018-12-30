@@ -17,6 +17,24 @@ vec3 color(const ray& r) {
 	return (1.0-t)*vec3(1.0, 1.0, 1.0) + t*vec3(0.5, 0.7, 1.0);
 }
 
+bool hitLine(ray l, ray p) {
+	vec3 A {l.origin()};
+	vec3 B {l.direction()};
+	vec3 C {p.origin()};
+	vec3 D {p.direction()};
+	float a1 = A.x();
+	float a2 = A.y();
+	float b1 = B.x();
+	float b2 = B.y();
+	float c1 = C.x();
+	float c2 = C.y();
+	float d1 = D.x();
+	float d2 = D.y();
+	float det = (b1*-d2) - (-d1*b2);
+	// we just wanna check if its close to zero
+	return det*det <= 0.000001;
+}
+
 bool hitSphere(vec3 center, ray p, float r) {
 	// recall eqn of sphere at origin 0 given by <v, v> = r^2
 	// where v is a vector [x,y,z]
@@ -64,6 +82,8 @@ int main() {
 			vec3 clr = color(r);
 			if (hitSphere(vec3(0,0,-5), r, 0.5)) {
 					clr = vec3(1, 0, 0);
+			} else if (hitLine(ray(vec3(0.5, 1, -1), vec3(0.5, 0.5, 0.5)), r)) {
+					clr = vec3(0, 1, 0);
 			}
 			int ir = int(255.99*clr.r());
 			int ig = int(255.99*clr.g());
