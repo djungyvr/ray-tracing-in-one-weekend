@@ -17,6 +17,10 @@ vec3 color(const ray& r) {
 	return (1.0-t)*vec3(1.0, 1.0, 1.0) + t*vec3(0.5, 0.7, 1.0);
 }
 
+// Origin of l and p should be (0, 0, z)
+// for general 3d lines switch to finding determinant of 3d matrix
+// TODO: Write matrix class so that we can get the determinant of an
+// n x n matrix
 bool hitLine(ray l, ray p) {
 	vec3 A {l.origin()};
 	vec3 B {l.direction()};
